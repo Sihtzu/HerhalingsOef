@@ -144,7 +144,43 @@ namespace WpfHerhalingsOef
 
         private void btnOef3_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                ingave = int.Parse(txtIngave.Text);
 
+                if (ingave < 2)
+                {
+                    throw new Exception("Getal mag niet kleiner zijn dan 2");
+                }
+                else
+                {
+                    for (int i = 1; i < ingave; i++)
+                    {
+                        i++;
+                        lstGegevens.Items.Add(i);
+                    }
+                }
+            }
+            catch (FormatException fEx)
+            {
+                MessageBox.Show("Gelieve gehele getallen in te voeren!\n\n"
+                    + "Details: " + fEx.Message,
+                    "Fout!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Oops er is een fout gebeurd.\n\n"
+                    + "Details: " + ex.Message,
+                    "Fout!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            finally
+            {
+                Debug.WriteLine("Laatste uitvoering: {0:dd/MM:yyyy HH:mm:ss}", DateTime.Now);
+            }
         }
     }
 }
